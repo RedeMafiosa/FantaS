@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import fetch from "node-fetch";
+// nada aqui
 
 const app = express();
 app.use(express.json());
@@ -25,21 +25,21 @@ app.post("/compra", async (req, res) => {
     const { produto, preco, quantidade, cliente } = req.body;
 
     try {
-        await fetch(webhookURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                content: "🛒 Nova compra!",
-                embeds: [{
-                    fields: [
-                        { name: "Produto", value: produto },
-                        { name: "Preço", value: preco },
-                        { name: "Quantidade", value: String(quantidade) },
-                        { name: "Cliente", value: cliente }
-                    ]
-                }]
-            })
-        });
+       await fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        content: "🛒 Nova compra!",
+        embeds: [{
+            fields: [
+                { name: "Produto", value: produto },
+                { name: "Preço", value: preco },
+                { name: "Quantidade", value: String(quantidade) },
+                { name: "Cliente", value: cliente }
+            ]
+        }]
+    })
+});
 
         res.sendStatus(200);
     } catch (err) {
